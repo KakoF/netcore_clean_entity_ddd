@@ -56,7 +56,7 @@ namespace Api.Application.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> Post([FromBody] UserDto user)
+        public async Task<ActionResult> Post([FromBody] UserDtoCreate user)
         {
             if (!ModelState.IsValid)
             {
@@ -79,7 +79,7 @@ namespace Api.Application.Controllers
         }
         [HttpPut]
         [Route("{id}")]
-        public async Task<ActionResult> Put(Guid id, [FromBody] UserDto user)
+        public async Task<ActionResult> Put(Guid id, [FromBody] UserDtoUpdate user)
         {
             if (!ModelState.IsValid)
             {
