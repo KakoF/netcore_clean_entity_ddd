@@ -23,6 +23,12 @@ namespace Api.Domain.Models
             get { return _email; }
             set { _email = value; }
         }
+        private string _password;
+        public string Password
+        {
+            get { return _password; }
+            set { _password = value; }
+        }
 
         private DateTime _createAt;
         public DateTime CreateAt

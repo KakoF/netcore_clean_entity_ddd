@@ -52,6 +52,8 @@ namespace Api.Service.Services
         {
             var model = _mapper.Map<UserModel>(item);
             var entity = _mapper.Map<UserEntity>(model);
+            var Userpassword = await _repository.SelectAsync(id);
+            entity.Password = Userpassword.Password;
             var result = await _repository.UpdasteAsync(id, entity);
             return _mapper.Map<UserDtoUpdateResult>(result);
         }

@@ -55,11 +55,11 @@ namespace Api.Data.Test
                 Assert.NotNull(_todosRegistros);
                 Assert.True(_todosRegistros.Count() > 0);
 
-                var _usuarioLogado = await _repository.Login(_registroAtualizado.Email);
+                var _usuarioLogado = await _repository.Login(_registroAtualizado.Email, _registroAtualizado.Password);
                 Assert.NotNull(_usuarioLogado);
                 Assert.Equal(_registroAtualizado.Email, _usuarioLogado.Email);
                 Assert.Equal(_registroAtualizado.Name, _usuarioLogado.Name);
-                
+
                 var _excluirRegistro = await _repository.DeleteAsync(_registroAtualizado.Id);
                 Assert.True(_excluirRegistro);
 
