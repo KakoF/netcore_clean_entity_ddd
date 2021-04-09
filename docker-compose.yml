@@ -1,0 +1,15 @@
+version: '3'
+
+services:
+  postgre:
+    container_name: 'postgres_ddd_base'
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: kako123456
+      POSTGRES_USER: kako
+      POSTGRES_DB: SolidBase
+    ports:
+      - '5432:5432'
+    expose:
+      - '5432'
