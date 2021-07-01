@@ -18,14 +18,12 @@ namespace Api.Service.Services
     {
         private readonly IUserRepository _repository;
         private readonly IMapper _mapper;
-        private readonly TokenConfiguration _tokenConfiguration;
         private readonly SigninConfigurations _signinConfigurations;
 
         private IConfiguration _configuration { get; }
-        public LoginService(IUserRepository repository, IMapper mapper, TokenConfiguration tokenConfiguration, SigninConfigurations signinConfigurations, IConfiguration configuration)
+        public LoginService(IUserRepository repository, IMapper mapper, SigninConfigurations signinConfigurations, IConfiguration configuration)
         {
             _repository = repository;
-            _tokenConfiguration = tokenConfiguration;
             _signinConfigurations = signinConfigurations;
             _configuration = configuration;
             _mapper = mapper;
@@ -58,7 +56,7 @@ namespace Api.Service.Services
                     }
                 );
                 DateTime createdDate = DateTime.Now;
-                DateTime expirationDate = createdDate + TimeSpan.FromSeconds(_tokenConfiguration.Seconds);
+                DateTime expirationDate = createdDate + TimeSpan.FromSeconds(Convert.ToInt32(Environment.GetEnvironmentVariable("Seconds")));
 
                 var handler = new JwtSecurityTokenHandler();
                 var token = CreateToken(identity, createdDate, expirationDate, handler);
@@ -75,8 +73,8 @@ namespace Api.Service.Services
         {
             var securityToken = handler.CreateToken(new SecurityTokenDescriptor
             {
-                Issuer = _tokenConfiguration.Issuer,
-                Audience = _tokenConfiguration.Audience,
+                Issuer = Environment.GetEnvironmentVariable("Issuer"),
+                Audience = Environment.GetEnvironmentVariable("Audience"),
                 SigningCredentials = _signinConfigurations.SigningCredentials,
                 Subject = identity,
                 NotBefore = createdDate,

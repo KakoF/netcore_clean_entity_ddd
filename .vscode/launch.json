@@ -20,7 +20,11 @@
                 "pattern": "\\\\bNow listening on:\\\\s+(https?://\\\\S+)"
             },
             "env": {
-                "ASPNETCORE_ENVIRONMENT": "Development"
+                "ASPNETCORE_ENVIRONMENT": "Development",
+                "DB_CONNECTION": "Server=localhost;Port=5432;Database=SolidBase;User Id=kako;Password=kako123456;",
+                "Audience": "kakoferrare87@gmail.com",
+                "Issuer": "Api",
+                "Seconds": "28800",
             },
             "sourceFileMap": {
                 "/Views": "${workspaceFolder}/Views"
