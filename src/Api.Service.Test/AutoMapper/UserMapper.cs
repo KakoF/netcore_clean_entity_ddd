@@ -13,7 +13,7 @@ namespace Api.Service.Test.AutoMapper
         [Fact(DisplayName = "É possivel Mapear os Modelos")]
         public void E_Possivel_Mapear_Os_Modelos()
         {
-            var model = new UserModel()
+            var model = new UserModel
             {
                 Id = Guid.NewGuid(),
                 Name = Faker.Name.FullName(),
@@ -25,7 +25,7 @@ namespace Api.Service.Test.AutoMapper
             var listaEntity = new List<UserEntity>();
             for (int i = 0; i < 5; i++)
             {
-                var item = new UserEntity()
+                var item = new UserEntity
                 {
                     Id = Guid.NewGuid(),
                     Name = Faker.Name.FullName(),

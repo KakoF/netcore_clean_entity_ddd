@@ -28,7 +28,8 @@ namespace Api.Data.Test
                 UserEntity _entity = new UserEntity
                 {
                     Email = Faker.Internet.Email(),
-                    Name = Faker.Name.FullName()
+                    Name = Faker.Name.FullName(),
+                    Password = Faker.Lorem.Words(10).ToString()
                 };
 
                 var _registroCriado = await _repository.InsertAsync(_entity);
