@@ -8,7 +8,7 @@ using Xunit;
 
 namespace Api.Service.Test.User
 {
-    public class ExecurteGetAll : UserTestes
+    public class QuandoForExecutadoGetAll : UserTestes
     {
         private IUserService _service;
         private Mock<IUserService> _serviceMock;
