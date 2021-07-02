@@ -15,9 +15,9 @@ namespace Data.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("Relational:MaxIdentifierLength", 63)
-                .HasAnnotation("ProductVersion", "5.0.4")
-                .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+                .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn)
+                .HasAnnotation("ProductVersion", "3.1.11")
+                .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             modelBuilder.Entity("Api.Domain.Entities.UserEntity", b =>
                 {
@@ -29,13 +29,18 @@ namespace Data.Migrations
                         .HasColumnType("timestamp without time zone");
 
                     b.Property<string>("Email")
-                        .HasMaxLength(100)
-                        .HasColumnType("character varying(100)");
+                        .HasColumnType("character varying(100)")
+                        .HasMaxLength(100);
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasMaxLength(60)
-                        .HasColumnType("character varying(60)");
+                        .HasColumnType("character varying(60)")
+                        .HasMaxLength(60);
+
+                    b.Property<string>("Password")
+                        .IsRequired()
+                        .HasColumnType("character varying(200)")
+                        .HasMaxLength(200);
 
                     b.Property<DateTime?>("UpdateAt")
                         .HasColumnType("timestamp without time zone");
@@ -46,6 +51,17 @@ namespace Data.Migrations
                         .IsUnique();
 
                     b.ToTable("Users");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("2f29ef84-261a-4400-9f6b-28f448fd4143"),
+                            CreateAt = new DateTime(2021, 7, 2, 8, 24, 30, 697, DateTimeKind.Local).AddTicks(6600),
+                            Email = "kakoferrare87@gmail.com",
+                            Name = "Kako",
+                            Password = "kako123456",
+                            UpdateAt = new DateTime(2021, 7, 2, 8, 24, 30, 698, DateTimeKind.Local).AddTicks(7844)
+                        });
                 });
 #pragma warning restore 612, 618
         }
