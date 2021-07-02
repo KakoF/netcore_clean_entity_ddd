@@ -3,12 +3,14 @@ using System;
 using System.Collections.Generic;
 using Api.CrossCutting.DependencyInjection;
 using Api.CrossCutting.Mappings;
+using Api.Data.Context;
 using Api.Domain.Security;
 using AutoMapper;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -23,11 +25,11 @@ namespace application
         public Startup(IConfiguration configuration, IWebHostEnvironment environment)
         {
             Configuration = configuration;
-            HostingEnvironment = environment;
+            _environment = environment;
         }
 
         public IConfiguration Configuration { get; }
-        public IWebHostEnvironment HostingEnvironment { get; }
+        public IWebHostEnvironment _environment { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
@@ -135,6 +137,17 @@ namespace application
             {
                 endpoints.MapControllers();
             });
+            if (Environment.GetEnvironmentVariable("MIGRATION").ToLower() == "APLICAR".ToLower())
+            {
+                using (var service = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>()
+                                                            .CreateScope())
+                {
+                    using (var context = service.ServiceProvider.GetService<MyContext>())
+                    {
+                        context.Database.Migrate();
+                    }
+                }
+            }
         }
     }
 }

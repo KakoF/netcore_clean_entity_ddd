@@ -25,6 +25,7 @@
                 "Audience": "kakoferrare87@gmail.com",
                 "Issuer": "Api",
                 "Seconds": "28800",
+                "MIGRATION": "APLICAR",
             },
             "sourceFileMap": {
                 "/Views": "${workspaceFolder}/Views"
